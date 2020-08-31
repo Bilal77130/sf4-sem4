@@ -25,7 +25,12 @@
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
-        "symfony/maker-bundle": "^1.21"
+        "fzaninotto/faker": "^1.9",
+        "symfony/debug": "4.4.*",
+        "symfony/maker-bundle": "^1.21",
+        "symfony/stopwatch": "^4.4",
+        "symfony/twig-bundle": "^4.4",
+        "symfony/web-profiler-bundle": "^4.4"
     },
     "config": {
         "preferred-install": {
