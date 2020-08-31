@@ -38,6 +38,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
     }
+    /**
+     * 1 Vérifier qu'il y ait une tentative de connexion
+     *     vérifier si on se trouve sur la page de connexion 
+     *      et que l'on a envoyé le formulaire
+     */
 
     public function supports(Request $request)
     {
@@ -45,21 +50,30 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             && $request->isMethod('POST');
     }
 
+    /**
+     * 2. Récuperer les informations de connexion
+     * 
+     */
+
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'email' => $request->request->get('email'),
+            'username' => $request->request->get('username'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['email']
+            $credentials['username']
         );
 
         return $credentials;
     }
 
+    /**
+     * 3. Récuperer l'utilisateur qui se connecte
+     *
+     */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
@@ -67,19 +81,38 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['username']]);
+
+        if(is_null($user))
+             $user = $this->entityManager->getRepository(User::class)->findOneBy(['pseudo' => $credentials['username']]);
+       
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('adresse email ou pseudo inconnue.');
         }
 
         return $user;
     }
-
+    /**
+     * 4. Vérifier la validité du mot de passe
+     * 
+     */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        $isValidPassword = $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        
+        if (!$isValidPassword) {
+            // fail password authenticating
+            throw new CustomUserMessageAuthenticationException('Mot de passe incorrect.');
+        }
+
+        /** @var User $user */
+        if($user->getIsConfirmed()!==true){
+            throw new CustomUserMessageAuthenticationException('Vous devez confirmer votre adresse pour vous connecter.');
+        }
+        
+        return true;
     }
 
     /**
@@ -90,6 +123,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         return $credentials['password'];
     }
 
+    /**
+     * 5. Action à effectuer après avoir été connecté à symfony
+     *
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
@@ -97,7 +134,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 

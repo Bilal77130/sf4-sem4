@@ -1,0 +1,23 @@
+{#
+Exemple de la structure du tableau retourné par app.flashes()
+
+    [
+        "success"=>[
+        "Vous avez été inscrit",
+        "Autre message de succès"
+        ],
+
+        "danger"=>[
+            "Accès interdit."
+        ]
+    ],
+#}
+
+{% for type, message_list in app.flashes %}
+ 
+    {% for message in message_list %}
+        <div class="alert alert-{{type}}" role="alert">
+            {{ message}}
+        </div>
+    {% endfor %}
+{% endfor %}

@@ -1,0 +1,23 @@
+
+
+{{form_start(user_form)}}
+        {{form_row(user_form.pseudo,{label: "Pseudo"})}}
+       
+            {{form_row(user_form.email,{label: "Email"})}}
+ 
+
+        <button class="btn btn-success btn-bloc;" type="submit">Modifier</button>
+{{form_end(user_form)}}
+
+
+sss
+{{form_start(password_form)}}
+
+        {{form_row(password_form.pseudo,{label: "Pseudo"})}}
+
+        {{ form_row(password_form.plainPassword.first,{label: "Mot de passe"}) }}
+        {{ form_row(password_form.plainPassword.second,{label: "Confirmer le mot de passe"}) }}
+ 
+        <button class="btn btn-success btn-bloc;" type="submit">Modifier</button>
+{{form_end(password_form)}}
+

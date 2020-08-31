@@ -23,12 +23,22 @@
     </ul>
     <span class="navbar-text">
     
+  
+    {% if app.user %}
     <button type="button" class="btn btn-primary btn-sm">
-        <a class="nav-link text-white" href="{{path('home')}}">Inscription <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-white" href="{{path('app_profile')}}">{{app.user.pseudo}} </a>
     </button>
+    <button type="button" class="btn btn-primary btn-sm">
+        <a class="nav-link text-white" href="{{path('app_logout')}}">D&eacute;connexion </a>
+    </button>
+   {% else %}
     <button type="button" class="btn btn-primary btn-sm">
         <a class="nav-link text-white" href="{{path('app_login')}}">Connexion </a>
     </button>
+    <button type="button" class="btn btn-primary btn-sm">
+        <a class="nav-link text-white" href="{{path('app_register')}}">Inscription <span class="sr-only">(current)</span></a>
+    </button>
+    {% endif %}
      
     </span>
   </div>
