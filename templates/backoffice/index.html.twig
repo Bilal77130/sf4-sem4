@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil!{% endblock %}
+
+{% block body %}
+{% include 'includes/flash.html.twig' %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<a class="btn btn-primary float-right" href="{{path('add_event')}}">Ajout</i></a>
+    <h1>Liste des événements</h1>
+    {# Inclusion du fichier des message flash #}
+    {% include 'includes/flash.html.twig' %}
+
+    <br/>
+    <table class="table table-striped">
+    <thead>
+        <th>id</th>
+        <th>Auteur</th>
+        <th>nom</th>
+        <th>Description</th>
+        <th>Lieu</th>
+        <th>Date de l'événement</th>
+       {#% if (is_granted('ROLE_ADMIN') == true ) or(is_granted('ROLE_EDIT') == true) %#}
+        <th>Modification</th>
+        <th>Suppression</th>
+        {#% endif %#} 
+    </thead>
+    Nombre d'événements : {{events|length}}
+    {% for event in events %}
+          
+            <tr>
+                <td>{{ event.id }}</td>
+                <td>{{ event.author.pseudo }}</td>
+                <td>{{ event.name }}</td>
+                <td>{{ event.description|slice(0.25) }}</td>
+                <td>{{ event.place }}</td>
+                <td>{{event.eventDate|date("m/d/Y H:m:i") }}</td>
+                {#% if (is_granted('ROLE_ADMIN') == true ) or(is_granted('ROLE_EDIT') == true) %#}
+                <td class="text-center"><a class="btn btn-success" href="{{path('modif_event',{id:event.id})}}"><i class="fas fa-pencil-alt"></i></a></td>
+                <td class="text-center"><a class="btn btn-danger" href="{{path('delete_event',{id:event.id})}}"><i class="fas fa-trash-alt"></i></a></td>
+                 {#% endif %#}  
+            </tr>    
+                  
+        {% endfor %}
+    </table>
+{% endblock %}

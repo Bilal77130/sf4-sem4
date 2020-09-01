@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'évenement!{% endblock %}
+
+{% block body %}
+<a href="{{app.request.headers.get('referer')}}">
+         <button type="button" class="btn btn-primary">Retour</button>
+        </a>
+<h3>Description de l'évenement {{event.name}}</h3>
+
+<div class="section">
+
+
+    <article class="media">
+        <div class="float-left">
+            <figure class="image is-128x128 ml-1">
+           
+                <img src="https://loremflickr.com/256/256/album,music/all?lock={{event.id}}" alt="Image">
+            </figure>
+            
+        </div>
+        <div class="float-right">
+            <p>Nom : {{event.name}}</p>
+            <p>Description : {{event.description}}</p>
+            <p>Author : {{event.author.pseudo}}</p>
+             <p>Date de l'événement : {{event.eventDate|date("m/d/Y H:m:i") }}</p>
+            <p>
+                <a href="{{path('modif_event',{id:event.id})}}">
+                    <button type="button" class="btn btn-primary">Modifier</button>
+                </a>
+            </p>
+            <p>
+                <a href="{{path('delete_event',{id:event.id})}}">
+                    <button type="button" class="btn btn-danger">Supprimer</button>
+                </a>
+            </p>
+        </div>
+      
+    </article>
+
+
+</div>
+{% endblock %}

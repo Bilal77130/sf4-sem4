@@ -47,4 +47,24 @@ class EventRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    /**
+     * @return Event[] Returns an array of Event objects
+     */
+    
+    public function findByUser($idUser)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.author = :author')
+            ->setParameter('author', $idUser)
+            // ->orderBy('e.id', 'ASC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+
 }

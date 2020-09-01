@@ -9,28 +9,37 @@
         <a class="nav-link" href="{{path('home')}}">Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Cr&eacute;er un &eacute;v&eacute;nement</a>
+
       </li>
+      {% if is_granted('ROLE_ADMIN') ==true %}
       <li class="nav-item">
-        <a class="nav-link" href="#">Gestion d'&eacute;v&eacute;nements</a>
+        <a class="nav-link" href="{{path('app_backoffice')}}">Gestion d'&eacute;v&eacute;nements</a>
+      </li>
+      {% endif %}
+       <li class="nav-item">
+        <a class="nav-link" href="{{path('list_envents_user_participated')}}">Mes participations</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="#">Participations</a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="#">Invitation</a>
+        <a class="nav-link" href="{{path('list_envents_user_created')}}">Mes événements</a>
       </li>
     </ul>
-    <span class="navbar-text">
+
     
   
     {% if app.user %}
-    <button type="button" class="btn btn-primary btn-sm">
-        <a class="nav-link text-white" href="{{path('app_profile')}}">{{app.user.pseudo}} </a>
-    </button>
-    <button type="button" class="btn btn-primary btn-sm">
-        <a class="nav-link text-white" href="{{path('app_logout')}}">D&eacute;connexion </a>
-    </button>
+    <div class="">
+      <a class="text-white" href="{{path('app_profile')}}">
+        <button type="button" class="btn btn-primary btn-sm">
+            {{app.user.pseudo}} 
+        </button>
+      </a>
+      <a class="text-white" href="{{path('app_logout')}}">
+        <button type="button" class="btn btn-primary btn-sm">
+          D&eacute;connexion
+        </button>
+      </a>
+    </div>
+
    {% else %}
     <button type="button" class="btn btn-primary btn-sm">
         <a class="nav-link text-white" href="{{path('app_login')}}">Connexion </a>
@@ -40,6 +49,9 @@
     </button>
     {% endif %}
      
-    </span>
+
+
+
+
   </div>
 </nav>

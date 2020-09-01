@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<h1>Liste des événements crées</h1>
+<div class="section">
+{% for event in list_event_created%}
+
+<div class="float-left">
+    <article>
+        <div>
+            <figure class="image is-128x128 ml-1">
+                 <a href="{{path('event_page',{id:event.id})}}">
+                    <img src="https://loremflickr.com/256/256/album,music/all?lock={{event.id}}" alt="Image">
+                </a>
+            </figure>
+        <p>{{event.name}}</p>
+        <p>{{event.description}}</p>
+        <p>{{event.eventDate|date("m/d/Y H:m:i") }}</p>
+        </div>
+      
+    </article>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de modification d'un événement!{% endblock %}
+
+{% block body %}
+{% include 'includes/flash.html.twig' %}
+    {% block section %}
+
+        <div class="col-12">
+        {{form_start(modif_event_form)}}
+                {#{form_row(record_event_form.author,{label: "Auteur"})}#}
+            
+                {{form_row(modif_event_form.name,{label: "Nom"})}}
+
+                {{form_row(modif_event_form.description,{label: "Description"})}}
+                {{form_row(modif_event_form.place,{label: "Lieu"})}}
+                {{form_row(modif_event_form.eventDate,{label: "Date de l'\évenement"})}}
+                {{ form_row(modif_event_form.author, { 'attr': {'class': 'invisible'} }) }}
+        
+
+             
+                <button class="btn btn-success btn-bloc;" type="submit">Modifier</button>
+        {{form_end(modif_event_form)}}
+        </div>
+
+    {% endblock %}
+{% endblock %}

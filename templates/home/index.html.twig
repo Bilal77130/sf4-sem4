@@ -3,18 +3,45 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+Nombre d'événements : {{events|length}}
+<br/>
+<div class="section">
+{% for event in events %}
+<div class="row media-row float-left">
+            
+        <div class="team-item col-lg-8 col-md-6 ml-1">
+            <div class="item-image">
+                <a href="{{path('event_page',{id:event.id})}}">
+                    <img src="https://loremflickr.com/256/256/album,music/all?lock={{event.id}}" alt="" title="" media-simple="true">
+                </a>
+            </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Bilal/Documents/courses/sf4-sem4/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Bilal/Documents/courses/sf4-sem4/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
+            <div class="item-caption py-12">
+
+                <div class="item-name px-2">
+                    <p>{{event.eventDate|date("m/d/Y H:m:i") }}</p>
+                    <p class="mbr-fonts-style display-5">
+                        {{event.name}}
+                        </p>
+                </div>
+                <div class="item-role px-2">
+                    <p>{{event.description|slice(0.25) }}</p>
+                </div>
+                <div class="item-social pt-2">
+                    <a href="https://twitter.com/mobirise" target="_blank">
+                        <span class="p-1 socicon-twitter socicon mbr-iconfont mbr-iconfont-social" media-simple="true"></span>
+                        <span class="p-1 socicon-facebook socicon mbr-iconfont mbr-iconfont-social" media-simple="true"></span>
+                        <span class="p-1 socicon-googleplus socicon mbr-iconfont mbr-iconfont-social" media-simple="true"></span>
+                        <span class="p-1 socicon-linkedin socicon mbr-iconfont mbr-iconfont-social" media-simple="true"></span>
+                        
+                        
+                    </a>
+                </div>
+            </div>
+
+        </div>    
 </div>
+  {% endfor %}
+  </div>
 {% endblock %}

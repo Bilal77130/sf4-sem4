@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page profile!{% endblock %}
+
+{% block body %}
+{% include 'includes/flash.html.twig' %}
+    {% block section %}
+
+        <div class="col-12">
+        {{form_start(record_event_form)}}
+                {#{form_row(record_event_form.author,{label: "Auteur"})}#}
+            
+                {{form_row(record_event_form.name,{label: "Nom"})}}
+
+                {{form_row(record_event_form.description,{label: "Description"})}}
+                {{form_row(record_event_form.place,{label: "Lieu"})}}
+                {{form_row(record_event_form.eventDate,{label: "Date de l'\évenement"})}}
+                {{ form_row(record_event_form.author, { 'attr': {'class': 'invisible'} }) }}
+        
+
+                <button class="btn btn-success btn-bloc;" type="submit">Ajouter</button>
+        {{form_end(record_event_form)}}
+        </div>
+
+    {% endblock %}
+{% endblock %}

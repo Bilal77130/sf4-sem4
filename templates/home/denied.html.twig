@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page profile!{% endblock %}
+
+{% block body %}
+{% include 'includes/flash.html.twig' %}
+    {% block section %}
+
+    <div class="section">
+    
+        Vous n'avez pas accès à cette fonctionnalité
+        <a href="{{app.request.headers.get('referer')}}">
+         <button type="button" class="btn btn-primary">Retour</button>
+        </a>
+    </div>
+
+    {% endblock %}
+{% endblock %}
