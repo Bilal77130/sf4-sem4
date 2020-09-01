@@ -4,6 +4,9 @@
 
 {% block body %}
 {% include 'includes/flash.html.twig' %}
+<a href="{{app.request.headers.get('referer')}}">
+         <button type="button" class="btn btn-primary">Retour</button>
+        </a>
     {% block section %}
 
         <div class="col-12">
