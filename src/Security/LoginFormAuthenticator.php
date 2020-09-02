@@ -107,10 +107,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new CustomUserMessageAuthenticationException('Mot de passe incorrect.');
         }
 
-        /** @var User $user */
-        if($user->getIsConfirmed()!==true){
-            throw new CustomUserMessageAuthenticationException('Vous devez confirmer votre adresse pour vous connecter.');
-        }
+        // /** @var User $user */
+        // if($user->getIsConfirmed()!==true){
+        //     throw new CustomUserMessageAuthenticationException('Vous devez confirmer votre adresse pour vous connecter.');
+        // }
         
         return true;
     }
