@@ -133,8 +133,12 @@ class HomeController extends AbstractController
      */
     public function list_envent_user_created(EventRepository $repository)
     {
-        $idUser = $this->security->getUser()->getId();
+        if($this->security->getUser()){
+        $idUser = $this->security->getUser();
         $eventCreated = $repository->findByUser($idUser);
+        }else{
+            $eventCreated = array();
+        }
 
         return $this->render('home/page_events_user_created.html.twig', [
             'controller_name' => 'Liste des evenements crées',
