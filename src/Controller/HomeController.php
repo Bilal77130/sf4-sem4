@@ -15,8 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 Use App\Form\PostType;
-use App\Repository\ParticipantRepository;
+use App\Form\RegistrationFormType;
+use App\Form\SendInvitationFormType;
 use App\Repository\ParticipationRepository;
+use App\Service\EmailSender;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Email;
 
 class HomeController extends AbstractController
 {
@@ -309,7 +313,37 @@ class HomeController extends AbstractController
         ]);
     }
 
+/**
+     * @Route("/sendMail", name="app_send_email")
+     */
+    public function sendEmail(Request $request, EmailSender $emailSender, EventRepository $eventRepository ): Response
+    {
+        $form = $this->createForm(SendInvitationFormType::class);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupération des données de formulaire (entité User + mot de passe)
+            $res = ($form->getData());
+           
+            $event = $res['eventName'];
+            // dd($event);
+            $aEmail = ($form->getData());
+
+
+           $emailToSend = $aEmail['email'];
+
+         
+            // Envoi de l'email de confirmation
+            $emailSender->sendInvitationEvent($emailToSend,$event);
+
+            $this->addFlash('success', 'Votre invitation est envoyée ! Un email de confirmation lui a été envoyé.');
+            return $this->redirectToRoute('app_send_email');
+        }
+
+        return $this->render('event/send_invitation.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
     
 
 }

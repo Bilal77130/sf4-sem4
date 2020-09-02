@@ -27,8 +27,8 @@ class EmailSender
     {
         return (new TemplatedEmail())
             ->from(new Address('bilal.doranco@gmail.com', 'Bilal'))      # Expéditeur
-            ->subject("\u{1F3A7} Kritik | $subject")                # Objet de l'email
-        ;
+            ->subject("\u{1F555} EventProject | $subject")                # Objet de l'email
+        ;	
     }
 
     /**
@@ -50,4 +50,31 @@ class EmailSender
         // Envoi de l'email
         $this->mailer->send($email);
     }
+
+ /**
+     * Envoyer un email de confirmation de compte suite à l'inscription
+     * @param User $user    l'utilisateur devant confirmer son compte
+     */
+    public function sendInvitationEvent($email,$event): void
+    {
+        // dd($event);
+        
+        $email = $this->createTemplatedEmail('Vous êtes invitez à l\'événement : '.$event->getName().'!')
+            ->to(new Address($email, 'testeur'))    # Destinataire
+            ->htmlTemplate('emails/invitation_event.html.twig')
+            ->context([                             # variables du template
+                'event' => $event,
+            ])
+            
+            ;
+            
+            
+
+        // dd($user->getPseudo());
+        // Envoi de l'email
+        $this->mailer->send($email);
+    }
+
+
+
 }

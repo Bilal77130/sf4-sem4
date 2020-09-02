@@ -1,0 +1,11 @@
+
+{{event.name}}
+<br/>
+{{event.description}}
+<br/>
+Cette événement se tiendra le {{event.eventDate|date('d/m/Y')}} à {{event.eventDate|date('h:m:i')}}
+<br>
+Pour participer, veuillez cliquer sur le lien suivant : 
+<br/>
+
+{{ url('event_page', { 'id': event.id }) }}

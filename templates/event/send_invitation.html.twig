@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invitez un ami{% endblock %}
+
+{% block body %}
+    {% include 'includes/flash.html.twig' %}
+
+    <h1>Invitez un ami</h1>
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.eventName) }}
+       <button class="btn btn-primary" type="submit" class="btn">Valider</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}
