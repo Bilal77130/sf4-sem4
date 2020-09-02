@@ -66,5 +66,24 @@ class EventRepository extends ServiceEntityRepository
     }
 
 
+    // /**
+    //  * @return Event[] Returns an array of Event objects
+    //  */
+    
+    public function findByUserParticipants($idUser)
+    {
+        return $this->createQueryBuilder('p')
+                    ->addSelect('s')
+                    ->from('MG\UserBundle\Entity\SocieteDiffuseur', 's')
+                    // ->join('s.paysDiffs', 'pays')
+                    // ->where(':filmId MEMBER OF p.films')
+                    // ->andWhere('participant MEMBER OF p.participants')
+                    ->setParameter('participants', $idUser)
+                
+                            
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 }

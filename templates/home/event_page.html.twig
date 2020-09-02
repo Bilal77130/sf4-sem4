@@ -9,7 +9,7 @@
 <h3>Description de l'évenement {{event.name}}</h3>
 
 <div class="section">
-
+   {% include 'includes/flash.html.twig' %}
 
     <article class="media">
         <div class="float-left">
@@ -24,6 +24,9 @@
             <p>Description : {{event.description}}</p>
             <p>Author : {{event.author.pseudo}}</p>
              <p>Date de l'événement : {{event.eventDate|date("m/d/Y H:m:i") }}</p>
+
+          {% if  app.user %}
+
             <p>
                 <a href="{{path('modif_event',{id:event.id})}}">
                     <button type="button" class="btn btn-primary">Modifier</button>
@@ -34,8 +37,23 @@
                     <button type="button" class="btn btn-danger">Supprimer</button>
                 </a>
             </p>
+            {% if  isParticipate == false %}
+            <p>
+                <a href="{{path('app_subscribe_event',{id:event.id})}}">
+                    <button type="button" class="btn btn-primary">Participer</button>
+                </a>
+             </p>
+           
+            {% else %}
+           <p>
+                <a href="{{path('app_unsubscribe_event',{idEvent:event.id,idUser:app.user.id})}}">
+                    <button type="button" class="btn btn-primary">Se désinscrire</button>
+                </a>
+             </p>
+            {% endif %}
+
         </div>
-      
+        {% endif %}
     </article>
 
 

@@ -78,16 +78,7 @@ class RecordEventFormType extends AbstractType
 
             ->add('eventDate',DateTimeType::class,[
                 'attr' => ['placeholder' => 'Veuillez entrez le lieu une date'],
-                    // 'constraints'=>[
-                    //     new NotBlank(['message'=>'Veuillez entrer un lieu']),
-                    //     new Length([
-                    //         'max'=>30,
-                    //         'maxMessage'=>'Le pseudo ne peut contenir plus de 180 caractère',
-                    //         'min'=>3,
-                    //         'minMessage'=>'Le pseudo ne peut contenir au moins de 3 caractère',
-                            
-                    //     ])
-                    // ]
+                'widget' => 'single_text',
                 ])
          ;
 
