@@ -26,7 +26,7 @@ class EmailSender
     private function createTemplatedEmail(string $subject): TemplatedEmail
     {
         return (new TemplatedEmail())
-            ->from(new Address('bilal.doranco@gmail.com', 'Bilal'))      # Expéditeur
+            ->from(new Address('bil36090@gmail.com', 'Bilal'))      # Expéditeur
             ->subject("\u{1F555} EventProject | $subject")                # Objet de l'email
         ;	
     }
