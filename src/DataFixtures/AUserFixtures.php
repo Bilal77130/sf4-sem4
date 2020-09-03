@@ -21,7 +21,7 @@ class AUserFixtures extends BaseFixture
     protected function loadData()
     {
         //Administrateurs 
-        $this->createMany(5,'user_admin',function(int $num){
+        $this->createMany($this->faker->randomDigit(),'user_admin',function(int $num){
         $admin = new User();
         $password = $this->encoder->encodePassword($admin,'admin'.$num);
         return $admin
@@ -35,7 +35,7 @@ class AUserFixtures extends BaseFixture
         });
 
         // Utilisateurs
-        $this->createMany(20,'user_user_event',function(int $num){
+        $this->createMany(5,'user_user_event',function(int $num){
             $user = new User();
             $password = $this->encoder->encodePassword($user,'user'.$num);
             return $user
@@ -48,7 +48,7 @@ class AUserFixtures extends BaseFixture
                         ;
             });
 
-            $this->createMany(20,'admin_user_event',function(int $num){
+            $this->createMany(5,'admin_user_event',function(int $num){
                 $user = new User();
                 $password = $this->encoder->encodePassword($user,'user'.$num);
                 return $user
