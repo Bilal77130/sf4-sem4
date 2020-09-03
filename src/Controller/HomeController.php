@@ -232,7 +232,7 @@ class HomeController extends AbstractController
             $event 
         );
 
-        dd($participation);
+        // dd($participation);
 
         return $this->render('home/event_page.html.twig', [
             'controller_name' => 'Description d\'un événement',
