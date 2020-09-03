@@ -22,7 +22,7 @@ class ParticipationsFixtures extends BaseFixture
     protected function loadData()
     {
         //Administrateurs 
-        $this->createMany($this->faker->randomDigit(),'participation',function(int $num){
+        $this->createMany(1,'participation',function(int $num){
        
 
        return (new Participation())
