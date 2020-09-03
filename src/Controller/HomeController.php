@@ -250,12 +250,15 @@ class HomeController extends AbstractController
 
         $event = $repository->find($request->get('id'));
 
-        if( $this->security->getUser() ) 
-        if (!in_array('ROLE_ADMIN', $this->security->getUser()->getRoles())) {
-            if (!$this->isGranted('POST_EDIT', $event)) {
-                return $this->redirectToRoute('access_denied');
-            }
-        }   
+        if( $this->security->getUser() ){ 
+            if (!in_array('ROLE_ADMIN', $this->security->getUser()->getRoles())) {
+                if (!$this->isGranted('POST_EDIT', $event)) {
+                    return $this->redirectToRoute('access_denied');
+                }
+            }   
+        }else{
+            return $this->redirectToRoute('access_denied');
+        }
         $form = $this->createForm(RecordEventFormType::class,$event);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -302,11 +305,15 @@ class HomeController extends AbstractController
 
         // dd($event);
 
-        if (!in_array('ROLE_ADMIN', $this->security->getUser()->getRoles())) {
-            if (!$this->isGranted('POST_EDIT', $event)) {
-                return $this->redirectToRoute('access_denied');
-            }
-        }  
+        if( $this->security->getUser() ){ 
+            if (!in_array('ROLE_ADMIN', $this->security->getUser()->getRoles())) {
+                if (!$this->isGranted('POST_EDIT', $event)) {
+                    return $this->redirectToRoute('access_denied');
+                }
+            }   
+        }else{
+            return $this->redirectToRoute('access_denied');
+        }
         $this->entityManager->remove($event);
         $this->entityManager->flush();
         $this->addFlash('danger','L\'événement à bien été supprimé.');

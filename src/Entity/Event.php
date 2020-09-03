@@ -52,6 +52,7 @@ class Event
 
     /**
      * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="event")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $participations;
 

@@ -3,7 +3,7 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<h1>Liste des événements crées</h1>
+Liste des événements crées : {{list_event_created|length}}
 <div class="section">
 {% for event in list_event_created%}
 
