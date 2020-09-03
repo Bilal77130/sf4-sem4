@@ -225,14 +225,14 @@ class HomeController extends AbstractController
 
         $event = $repository->find($request->get('id'));
 
-       dd($event);
+      
 
         $participation = $participationRepository->findByUserAndEvent(
             $this->security->getUser(),
             $event 
         );
 
-        // dd($participation);
+        dd($participation);
 
         return $this->render('home/event_page.html.twig', [
             'controller_name' => 'Description d\'un événement',
