@@ -40,34 +40,20 @@ class SendInvitationFormType extends AbstractType
     {
 
 
-        // todo si pas connecté rediriger en amont
-
         $user = ($this->security->getUser());
         $findMyEvents = $this->eventRepository->findByUser($user);
 
-        // dd($findMyEvents);
 
 
         $builder
             ->add('email')
             ->add('eventName', EntityType::class, [
                 'class' => Event::class,
-                // 'choice_label' => function ($category) {
-                    // return $category->getDisplayName();
-                // }
                 'choice_label' => 'name',
             ])
 
-            // ->add('eventChoice',HiddenType::class,[
-
-            // ])
+    
         ;
     }
 
-    // public function configureOptions(OptionsResolver $resolver)
-    // {
-    //     $resolver->setDefaults([
-    //         'data_class' => Event::class,
-    //     ]);
-    // }
 }
