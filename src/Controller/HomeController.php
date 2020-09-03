@@ -225,7 +225,7 @@ class HomeController extends AbstractController
 
         $event = $repository->find($request->get('id'));
 
-       
+       dd($event);
 
         $participation = $participationRepository->findByUserAndEvent(
             $this->security->getUser(),
