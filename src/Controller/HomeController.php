@@ -250,6 +250,8 @@ class HomeController extends AbstractController
 
         $event = $repository->find($request->get('id'));
 
+        dd($event);
+
         if( $this->security->getUser() ){ 
             if (!in_array('ROLE_ADMIN', $this->security->getUser()->getRoles())) {
                 if (!$this->isGranted('POST_EDIT', $event)) {
