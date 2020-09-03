@@ -57,6 +57,18 @@ class HomeController extends AbstractController
      */
     public function gestionEvents(EventRepository $eventRepository, Request $request)
     {
+
+        
+
+        if( $this->security->getUser() ) 
+        if (!in_array('ROLE_ADMIN', $this->security->getUser()->getRoles())) {
+            return $this->redirectToRoute('access_denied');
+         } else{
+            return $this->redirectToRoute('access_denied');
+         }
+
+
+
         $resultats = $eventRepository->findAll();
 
      

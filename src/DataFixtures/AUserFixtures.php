@@ -6,7 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 ;
-class UserFixtures extends BaseFixture
+class AUserFixtures extends BaseFixture
 {
     private $encoder;
     /**
@@ -35,7 +35,7 @@ class UserFixtures extends BaseFixture
         });
 
         // Utilisateurs
-        $this->createMany(20,'user_user',function(int $num){
+        $this->createMany(20,'user_user_event',function(int $num){
             $user = new User();
             $password = $this->encoder->encodePassword($user,'user'.$num);
             return $user
@@ -48,6 +48,31 @@ class UserFixtures extends BaseFixture
                         ;
             });
 
+            $this->createMany(20,'admin_user_event',function(int $num){
+                $user = new User();
+                $password = $this->encoder->encodePassword($user,'user'.$num);
+                return $user
+                            ->setEmail('admin'.$num.'@event.fr')
+                            ->setRoles([])
+                            ->setPassword($password)
+                            ->setPseudo($this->faker->unique()->userName)
+                            ->confirmAccount()
+                            ->renewToken()
+                            ;
+                });
+                
 
+                $this->createMany(20,'user_user',function(int $num){
+                    $user = new User();
+                    $password = $this->encoder->encodePassword($user,'user'.$num);
+                    return $user
+                                ->setEmail('user'.$num.'@event.fr')
+                                ->setRoles([])
+                                ->setPassword($password)
+                                ->setPseudo($this->faker->unique()->userName)
+                                ->confirmAccount()
+                                ->renewToken()
+                                ;
+                    });
     }
 }
