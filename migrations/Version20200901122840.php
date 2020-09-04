@@ -20,7 +20,7 @@ final class Version20200901122840 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE event ADD created_at DATETIME DEFAULT NULL, ADD event_date DATETIME DEFAULT NULL');
+        // $this->addSql('ALTER TABLE event ADD created_at DATETIME DEFAULT NULL, ADD event_date DATETIME DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void

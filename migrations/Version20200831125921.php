@@ -20,7 +20,7 @@ final class Version20200831125921 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user ADD pseudo VARCHAR(255) NOT NULL, ADD is_confirmed TINYINT(1) NOT NULL, ADD token VARCHAR(255) NOT NULL');
+        // $this->addSql('ALTER TABLE user ADD pseudo VARCHAR(255) NOT NULL, ADD is_confirmed TINYINT(1) NOT NULL, ADD token VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema) : void
