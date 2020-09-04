@@ -62,17 +62,22 @@
        
 
     </article>
-    <div>
+  
 
     <br/>
 
     {% if event.getParticipants()|length >0  %}
+    <div class="row">
         <h6>Liste des partcipants : </h6>
+        <br/>
         {% for participant in event.getParticipants() %}
-            <img src="https://robohash.org/{{participant.pseudo}}?set=set{{participant.id}}"  width="100">  
+        <div class="col">
+             <p class="h-25">{{participant.pseudo}}</p>
+            <p><img src="https://robohash.org/{{participant.pseudo}}?set=set{{participant.id}}"  width="100"></p>  
+        </div>
         {% endfor %}
+    </div>
     {% endif %}
     
 
-</div>
 {% endblock %}

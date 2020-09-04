@@ -28,7 +28,7 @@ class EventFixtures extends BaseFixture
             ->setName($this->faker->lastName)
             ->setDescription($this->faker->optional()->realText(250))
             ->setEventDate($this->faker->dateTimeBetween('-2 years'))
-            // ->addParticipant($this->getRandomReference('user_admin'))
+            ->addParticipant($this->getRandomReference('user_admin'))
          
             ;
 

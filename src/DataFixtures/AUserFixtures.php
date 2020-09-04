@@ -21,7 +21,7 @@ class AUserFixtures extends BaseFixture
     protected function loadData()
     {
         //Administrateurs 
-        $this->createMany($this->faker->randomDigit(),'user_admin',function(int $num){
+        $this->createMany(10,'user_admin',function(int $num){
         $admin = new User();
         $password = $this->encoder->encodePassword($admin,'admin'.$num);
         return $admin
