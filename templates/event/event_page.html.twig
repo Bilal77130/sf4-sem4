@@ -11,15 +11,15 @@
 <div class="section">
    {% include 'includes/flash.html.twig' %}
 
-    <article class="media">
-        <div class="float-left">
+    <article >
+        <div >
             <figure class="image is-128x128 ml-1">
            
                 <img src="https://loremflickr.com/256/256/album,music/all?lock={{event.id}}" alt="Image">
             </figure>
             
         </div>
-        <div class="float-right">
+        <div>
             <p>Nom : {{event.name}}</p>
             <p>Description : {{event.description}}</p>
             <p>Author : {{event.author.pseudo}}</p>
@@ -27,33 +27,40 @@
 
           {% if  app.user %}
 
-            <p>
+           
                 <a href="{{path('modif_event',{id:event.id})}}">
                     <button type="button" class="btn btn-primary">Modifier</button>
                 </a>
-            </p>
-            <p>
+          
                 <a href="{{path('delete_event',{id:event.id})}}">
                     <button type="button" class="btn btn-danger">Supprimer</button>
                 </a>
-            </p>
+            
             {% if  isParticipate == false %}
-            <p>
+        
                 <a href="{{path('app_subscribe_event',{id:event.id})}}">
                     <button type="button" class="btn btn-primary">Participer</button>
                 </a>
-             </p>
+            
            
             {% else %}
-           <p>
+           
                 <a href="{{path('app_unsubscribe_event',{idEvent:event.id,idUser:app.user.id})}}">
                     <button type="button" class="btn btn-primary">Se désinscrire</button>
                 </a>
-             </p>
+             
             {% endif %}
 
         </div>
         {% endif %}
+
+       {% if (app.request.attributes.get("_controller")|split('::')[1]=='event_page') %}
+
+       {% include 'event/send_invitation.html.twig' %}
+
+       {% endif %}
+       
+
     </article>
 
 

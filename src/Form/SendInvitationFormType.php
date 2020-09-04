@@ -47,10 +47,10 @@ class SendInvitationFormType extends AbstractType
 
         $builder
             ->add('email')
-            ->add('eventName', EntityType::class, [
-                'class' => Event::class,
-                'choice_label' => 'name',
-            ])
+            // ->add('eventName', EntityType::class, [
+            //     'class' => Event::class,
+            //     'choice_label' => 'name',
+            // ])
 
     
         ;

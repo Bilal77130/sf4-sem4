@@ -13,14 +13,15 @@ Nombre de participations : {{list_participation|length}}
     <article>
         <div>
             <figure class="image is-128x128 ml-1">
-                 <a href="{{path('event_page',{id:participation.event.id})}}">
-                    <img src="https://loremflickr.com/256/256/album,music/all?lock={{participation.event.id}}" alt="Image">
+                 <a href="{{path('event_page',{id:participation.id})}}">
+                    <img src="https://loremflickr.com/256/256/album,music/all?lock={{participation.id}}" alt="Image">
                 </a>
             </figure>
-        <p>{{participation.event.name}}</p>
-        <p>{{participation.event.description|slice(0, 10) }}...</p>
-        <p>{{participation.event.eventDate|date("m/d/Y H:m:i") }}</p>
+        <p>{{participation.name}}</p>
+        <p>{{participation.description|slice(0, 10) }}...</p>
+        <p>{{participation.eventDate|date("m/d/Y H:m:i") }}</p>
         </div>
+
       
     </article>
 </div>

@@ -6,7 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 ;
-class AUserFixtures extends BaseFixture
+class UserFixtures extends BaseFixture
 {
     private $encoder;
     /**
@@ -30,12 +30,13 @@ class AUserFixtures extends BaseFixture
                     ->setPassword($password)
                     ->setPseudo($this->faker->unique()->userName)
                     ->confirmAccount()
+                    ->addParticipation($this->getRandomReference('event'))
                     ->renewToken()
                     ;
         });
 
         // Utilisateurs
-        $this->createMany(5,'user_user_event',function(int $num){
+        $this->createMany(5,'user_event',function(int $num){
             $user = new User();
             $password = $this->encoder->encodePassword($user,'user'.$num);
             return $user
@@ -48,31 +49,6 @@ class AUserFixtures extends BaseFixture
                         ;
             });
 
-            $this->createMany(5,'admin_user_event',function(int $num){
-                $user = new User();
-                $password = $this->encoder->encodePassword($user,'user'.$num);
-                return $user
-                            ->setEmail('admin'.$num.'@event.fr')
-                            ->setRoles([])
-                            ->setPassword($password)
-                            ->setPseudo($this->faker->unique()->userName)
-                            ->confirmAccount()
-                            ->renewToken()
-                            ;
-                });
-                
-
-                $this->createMany(20,'user_user',function(int $num){
-                    $user = new User();
-                    $password = $this->encoder->encodePassword($user,'user'.$num);
-                    return $user
-                                ->setEmail('user'.$num.'@event.fr')
-                                ->setRoles([])
-                                ->setPassword($password)
-                                ->setPseudo($this->faker->unique()->userName)
-                                ->confirmAccount()
-                                ->renewToken()
-                                ;
-                    });
+          
     }
 }

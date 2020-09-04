@@ -51,15 +51,18 @@ class Event
     private $eventDate;
 
     /**
-     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="event")
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="participation")
      */
-    private $participations;
+    private $participants;
 
     public function __construct()
     {
-        $this->participations = new ArrayCollection();
+        $this->participants = new ArrayCollection();
     }
+
+    
+
+    
 
    
 
@@ -142,35 +145,35 @@ class Event
     }
 
     /**
-     * @return Collection|Participation[]
+     * @return Collection|User[]
      */
-    public function getParticipations(): Collection
+    public function getParticipants(): Collection
     {
-        return $this->participations;
+        return $this->participants;
     }
 
-    public function addParticipation(Participation $participation): self
+    public function addParticipant(User $participant): self
     {
-        if (!$this->participations->contains($participation)) {
-            $this->participations[] = $participation;
-            $participation->setEvent($this);
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $participant->addParticipation($this);
         }
 
         return $this;
     }
 
-    public function removeParticipation(Participation $participation): self
+    public function removeParticipant(User $participant): self
     {
-        if ($this->participations->contains($participation)) {
-            $this->participations->removeElement($participation);
-            // set the owning side to null (unless already changed)
-            if ($participation->getEvent() === $this) {
-                $participation->setEvent(null);
-            }
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+            $participant->removeParticipation($this);
         }
 
         return $this;
     }
+
+    
+
 
     
 

@@ -23,12 +23,13 @@ class EventFixtures extends BaseFixture
     protected function loadData()
     {
         //Administrateurs 
-        $this->createMany($this->faker->randomDigit(),'event',function(int $num){
+        $this->createMany($this->faker->numberBetween(1,10),'event',function(int $num){
          return   (new Event())
             ->setAuthor($this->getRandomReference('user_admin'))
             ->setName($this->faker->lastName)
             ->setDescription($this->faker->optional()->realText(250))
             ->setEventDate($this->faker->dateTimeBetween('-2 years'))
+            ->addParticipant($this->getRandomReference('user_admin'))
          
             ;
 

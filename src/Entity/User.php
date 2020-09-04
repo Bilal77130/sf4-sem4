@@ -59,9 +59,10 @@ class User implements UserInterface
     private $events;
 
     /**
-     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="user")
+     * @ORM\ManyToMany(targetEntity=Event::class, inversedBy="participants")
      */
-    private $participations;
+    private $participation;
+
 
     
     
@@ -69,6 +70,7 @@ class User implements UserInterface
     {
         $this->events = new ArrayCollection();
         $this->participations = new ArrayCollection();
+        $this->participation = new ArrayCollection();
         
     }
 
@@ -231,31 +233,26 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Participation[]
+     * @return Collection|Event[]
      */
-    public function getParticipations(): Collection
+    public function getParticipation(): Collection
     {
-        return $this->participations;
+        return $this->participation;
     }
 
-    public function addParticipation(Participation $participation): self
+    public function addParticipation(Event $participation): self
     {
-        if (!$this->participations->contains($participation)) {
-            $this->participations[] = $participation;
-            $participation->setUser($this);
+        if (!$this->participation->contains($participation)) {
+            $this->participation[] = $participation;
         }
 
         return $this;
     }
 
-    public function removeParticipation(Participation $participation): self
+    public function removeParticipation(Event $participation): self
     {
-        if ($this->participations->contains($participation)) {
-            $this->participations->removeElement($participation);
-            // set the owning side to null (unless already changed)
-            if ($participation->getUser() === $this) {
-                $participation->setUser(null);
-            }
+        if ($this->participation->contains($participation)) {
+            $this->participation->removeElement($participation);
         }
 
         return $this;
