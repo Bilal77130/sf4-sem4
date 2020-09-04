@@ -23,14 +23,17 @@ class EventFixtures extends BaseFixture
     {
         //Administrateurs 
         $this->createMany($this->faker->numberBetween(1,10),'event',function(int $num){
-         return   (new Event())
+         $evt =   (new Event())
             ->setAuthor($this->getRandomReference('user_admin'))
             ->setName($this->faker->lastName)
             ->setDescription($this->faker->optional()->realText(250))
-            ->setEventDate($this->faker->dateTimeBetween('-2 years'))
-            ->addParticipant($this->getRandomReference('user_admin'))
-         
-            ;
+            ->setEventDate($this->faker->dateTimeBetween('-2 years'));
+
+
+            for($i=0;$i<$this->faker->unique()->randomDigit;$i++){
+            $evt->addParticipant($this->getRandomReference('user_admin')); 
+            }
+        return $evt;
 
         });
 
