@@ -6,7 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 ;
-class UserFixtures extends BaseFixture
+class AUserFixtures extends BaseFixture
 {
     private $encoder;
     /**
@@ -30,7 +30,7 @@ class UserFixtures extends BaseFixture
                     ->setPassword($password)
                     ->setPseudo($this->faker->unique()->userName)
                     ->confirmAccount()
-                    ->addParticipation($this->getRandomReference('event'))
+                    // ->addParticipation($this->getRandomReference('event'))
                     ->renewToken()
                     ;
         });

@@ -69,7 +69,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->events = new ArrayCollection();
-        $this->participations = new ArrayCollection();
+
         $this->participation = new ArrayCollection();
         
     }

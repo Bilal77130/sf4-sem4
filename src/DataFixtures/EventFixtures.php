@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Event;
-use App\Entity\Participation;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -29,7 +28,7 @@ class EventFixtures extends BaseFixture
             ->setName($this->faker->lastName)
             ->setDescription($this->faker->optional()->realText(250))
             ->setEventDate($this->faker->dateTimeBetween('-2 years'))
-            ->addParticipant($this->getRandomReference('user_admin'))
+            // ->addParticipant($this->getRandomReference('user_admin'))
          
             ;
 
@@ -39,7 +38,7 @@ class EventFixtures extends BaseFixture
     public function getDependencies()
     {
         return [
-            UserFixtures::class,
+            AUserFixtures::class,
             EventFixtures::class
         ];
     }
